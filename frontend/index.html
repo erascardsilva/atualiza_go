@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atualiza GO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/style.css" />
+</head>
+
+<body>
+    <div id="app">
+        <aside id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">⟳</span>
+                    <span class="logo-text">Atualiza<span class="accent">GO</span></span>
+                </div>
+            </div>
+            <nav id="nav-menu">
+                <button class="nav-item active" data-page="home">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-label">Início</span>
+                </button>
+                <button class="nav-item" data-page="update">
+                    <span class="nav-icon">🔄</span>
+                    <span class="nav-label">Atualizar</span>
+                </button>
+                <button class="nav-item" data-page="actions">
+                    <span class="nav-icon">⚡</span>
+                    <span class="nav-label">Ações</span>
+                </button>
+                <button class="nav-item" data-page="about">
+                    <span class="nav-icon">ℹ️</span>
+                    <span class="nav-label">Sobre</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="version-tag">v2.0</div>
+            </div>
+        </aside>
+
+        <main id="content">
+            <section id="page-home" class="page active">
+                <div class="page-header">
+                    <h1>Sistema Detectado</h1>
+                    <p class="page-subtitle">Informações do seu sistema</p>
+                </div>
+                <div class="distro-card">
+                    <div class="distro-icon" id="distro-icon">🐧</div>
+                    <div class="distro-details">
+                        <h2 id="distro-name">Detectando...</h2>
+                        <div class="distro-meta">
+                            <span class="meta-badge" id="distro-family">—</span>
+                            <span class="meta-badge" id="distro-version">—</span>
+                            <span class="meta-badge" id="distro-pm">—</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card" id="feat-flatpak">
+                        <span class="feature-icon">📦</span>
+                        <span class="feature-label">Flatpak</span>
+                        <span class="feature-status" id="flatpak-status">—</span>
+                    </div>
+                    <div class="feature-card" id="feat-snap">
+                        <span class="feature-icon">🔷</span>
+                        <span class="feature-label">Snap</span>
+                        <span class="feature-status" id="snap-status">—</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-update" class="page">
+                <div class="page-header">
+                    <h1>Atualizar Sistema</h1>
+                    <p class="page-subtitle">Selecione as atualizações</p>
+                </div>
+                <div id="update-options" class="update-options"></div>
+                <div class="update-actions">
+                    <button id="btn-update" class="btn-primary" disabled>
+                        <span class="btn-icon">▶</span>
+                        Iniciar Atualização
+                    </button>
+                </div>
+                <div id="progress-area" class="progress-area hidden">
+                    <div id="progress-steps"></div>
+                    <div class="log-container">
+                        <div class="log-header">
+                            <span>Log de Saída</span>
+                            <button id="btn-clear-log" class="btn-small">Limpar</button>
+                        </div>
+                        <div id="log-output" class="log-output"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-actions" class="page">
+                <div class="page-header">
+                    <h1>Ações do Sistema</h1>
+                    <p class="page-subtitle">Após a atualização</p>
+                </div>
+                <div class="actions-grid">
+                    <button class="action-card" id="btn-reboot">
+                        <span class="action-icon">🔁</span>
+                        <span class="action-label">Reiniciar</span>
+                        <span class="action-desc">Reiniciar o sistema</span>
+                    </button>
+                    <button class="action-card danger" id="btn-shutdown">
+                        <span class="action-icon">⏻</span>
+                        <span class="action-label">Desligar</span>
+                        <span class="action-desc">Desligar o sistema</span>
+                    </button>
+                </div>
+            </section>
+
+            <section id="page-about" class="page">
+                <div class="page-header">
+                    <h1>Sobre</h1>
+                    <p class="page-subtitle">Atualiza GO — Atualizador de Sistema Linux</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-section">
+                        <h3>Como Usar</h3>
+                        <ol class="about-steps">
+                            <li>Na tela <strong>Início</strong>, confira se o sistema foi detectado corretamente.</li>
+                            <li>Acesse <strong>Atualizar</strong> e selecione os pacotes que deseja atualizar (Sistema,
+                                Flatpak, Snap).</li>
+                            <li>Clique em <strong>Iniciar Atualização</strong>. O sistema pedirá sua senha via
+                                autenticação gráfica.</li>
+                            <li>Acompanhe o progresso pelas barras e pelo log de saída em tempo real.</li>
+                            <li>Após concluir, use a tela <strong>Ações</strong> para reiniciar ou desligar, se
+                                necessário.</li>
+                        </ol>
+                    </div>
+                    <div class="about-section">
+                        <h3>Distros Suportadas</h3>
+                        <p>Debian, Ubuntu, Mint, Pop!_OS, Arch, Manjaro, EndeavourOS e derivados.</p>
+                    </div>
+                    <div class="about-section">
+                        <h3>Tecnologias</h3>
+                        <p>Go + Wails v2 ∙ HTML/CSS/JS ∙ pkexec (Polkit)</p>
+                    </div>
+                </div>
+                <div class="about-signature">
+                    <span class="signature-line"></span>
+                    <span class="signature-text">Erasmo Cardoso - Dev</span>
+                    <span class="signature-line"></span>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+</body>
+
+</html>

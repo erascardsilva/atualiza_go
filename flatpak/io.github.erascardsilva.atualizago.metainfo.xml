@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.erascardsilva.atualizago</id>
+  <name>Atualiza GO</name>
+  <summary>Atualizador de Sistema Linux com interface gráfica</summary>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <developer id="io.github.erascardsilva">
+    <name>Erasmo Cardoso</name>
+  </developer>
+  <description>
+    <p>
+      Ferramenta gráfica para atualização de sistemas Linux. Detecta automaticamente
+      a distribuição e disponibiliza opções de atualização para pacotes do sistema,
+      Flatpak e Snap.
+    </p>
+    <p>
+      Suporta Debian, Ubuntu, Arch, Manjaro e derivados. Acompanhe o progresso
+      com barras visuais em tempo real.
+    </p>
+  </description>
+  <launchable type="desktop-id">io.github.erascardsilva.atualizago.desktop</launchable>
+  <url type="homepage">https://github.com/erascardsilva/atualiza_go</url>
+  <url type="bugtracker">https://github.com/erascardsilva/atualiza_go/issues</url>
+  <content_rating type="oars-1.1" />
+  <releases>
+    <release version="2.0.0" date="2026-03-08">
+      <description>
+        <p>Versão 2.0 com interface gráfica moderna usando Wails.</p>
+      </description>
+    </release>
+  </releases>
+</component>
