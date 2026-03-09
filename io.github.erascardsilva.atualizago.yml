@@ -1,0 +1,35 @@
+app-id: io.github.erascardsilva.atualizago
+runtime: org.gnome.Platform
+runtime-version: '47'
+sdk: org.gnome.Sdk
+command: atualiza_go
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --share=network
+  - --talk-name=org.freedesktop.Flatpak
+  - --talk-name=org.freedesktop.PolicyKit1
+  - --system-talk-name=org.freedesktop.PolicyKit1
+  - --filesystem=host-os:ro
+  - --filesystem=/etc/os-release:ro
+
+modules:
+  - name: atualiza_go
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 atualiza_go /app/bin/atualiza_go
+      - install -Dm644 io.github.erascardsilva.atualizago.desktop /app/share/applications/io.github.erascardsilva.atualizago.desktop
+      - install -Dm644 io.github.erascardsilva.atualizago.metainfo.xml /app/share/metainfo/io.github.erascardsilva.atualizago.metainfo.xml
+      - install -Dm644 io.github.erascardsilva.atualizago.png /app/share/icons/hicolor/256x256/apps/io.github.erascardsilva.atualizago.png
+    sources:
+      - type: file
+        path: build/bin/atualiza_go
+      - type: file
+        path: flatpak/io.github.erascardsilva.atualizago.desktop
+      - type: file
+        path: flatpak/io.github.erascardsilva.atualizago.metainfo.xml
+      - type: file
+        path: flatpak/io.github.erascardsilva.atualizago.png
