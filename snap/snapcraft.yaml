@@ -7,8 +7,8 @@ description: |
   It supports major distributions and handles system packages (APT, Pacman, DNF, Zypper, etc.), 
   as well as Flatpak and Snap ecosystems. It also includes a telemetry dashboard for RAM and Disk monitoring.
 
-grade: stable
-confinement: strict
+grade: devel
+confinement: classic
 
 title: Atualiza GO
 license: GPL-3.0
