@@ -18,15 +18,8 @@ icon: snap/gui/atualiza-go.png
 apps:
   atualiza-go:
     command: bin/atualiza_go
-    plugs:
-      - network
-      - network-bind
-      - desktop
-      - desktop-legacy
-      - x11
-      - wayland
-      - opengl
-      - home
+    # Note: Plugs are not required for classic confinement and cause linter errors.
+
 
 parts:
   atualiza-go:
