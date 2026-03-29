@@ -44,6 +44,8 @@ parts:
     source: .
     build-snaps:
       - go/1.22/stable
+    build-environment:
+      - GOTOOLCHAIN: local
     build-packages:
       - libwebkit2gtk-4.0-dev
       - libgtk-3-dev
