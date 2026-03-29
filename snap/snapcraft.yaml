@@ -8,7 +8,7 @@ description: |
   as well as Flatpak and Snap ecosystems. It also includes a telemetry dashboard for RAM and Disk monitoring.
 
 grade: stable
-confinement: classic
+confinement: strict
 
 title: Atualiza GO
 license: GPL-3.0
@@ -18,7 +18,16 @@ icon: snap/gui/atualiza-go.png
 apps:
   atualiza-go:
     command: bin/atualiza_go
-    # Note: Plugs are not required for classic confinement and cause linter errors.
+    plugs:
+      - network
+      - network-bind
+      - desktop
+      - desktop-legacy
+      - x11
+      - wayland
+      - opengl
+      - home
+      - gsettings
 
 
 parts:
@@ -30,8 +39,6 @@ parts:
       - node/20/stable
     build-environment:
       - GOTOOLCHAIN: local
-      # Necessário para snaps classic no core22 passarem no linter de ELF/rpath
-      - CGO_LDFLAGS: "-Wl,-dynamic-linker=/snap/core22/current/lib64/ld-linux-x86-64.so.2 -Wl,-rpath=/snap/core22/current/lib/x86_64-linux-gnu"
 
     build-packages:
       - build-essential
