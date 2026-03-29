@@ -1,6 +1,6 @@
 name: atualiza-go
 base: core22
-version: '2.1'
+version: '2.2'
 summary: A modern graphical user interface for Linux system maintenance and updates.
 description: |
   Atualiza GO is a graphical tool built with Wails to simplify Linux system updates. 
