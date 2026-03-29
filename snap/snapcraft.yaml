@@ -30,6 +30,7 @@ parts:
     plugin: npm
     source: frontend
     npm-node-version: 20.x
+    npm-include-node: true
     build-packages:
       - nodejs
     override-build: |
@@ -41,7 +42,8 @@ parts:
     after: [frontend]
     plugin: go
     source: .
-    go-version: '1.22'
+    build-snaps:
+      - go/1.22/stable
     build-packages:
       - libwebkit2gtk-4.0-dev
       - libgtk-3-dev
@@ -52,5 +54,5 @@ parts:
       - libglib2.0-0
     override-build: |
       mkdir -p frontend/dist
-      cp -r ../frontend/install/dist/* frontend/dist/
+      cp -r $SNAPCRAFT_STAGE/dist/* frontend/dist/
       go build -o $SNAPCRAFT_PART_INSTALL/bin/atualiza_go .
