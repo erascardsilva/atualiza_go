@@ -10,6 +10,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
@@ -23,8 +25,6 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.22'
-        env:
-          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 
       - name: Snapcraft Build
