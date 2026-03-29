@@ -30,6 +30,9 @@ parts:
       - node/20/stable
     build-environment:
       - GOTOOLCHAIN: local
+      # Necessário para snaps classic no core22 passarem no linter de ELF/rpath
+      - CGO_LDFLAGS: "-Wl,-dynamic-linker=/snap/core22/current/lib64/ld-linux-x86-64.so.2 -Wl,-rpath=/snap/core22/current/lib/x86_64-linux-gnu"
+
     build-packages:
       - build-essential
       - libwebkit2gtk-4.0-dev
