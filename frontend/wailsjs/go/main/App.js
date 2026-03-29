@@ -6,6 +6,10 @@ export function GetDistroInfo() {
   return window['go']['main']['App']['GetDistroInfo']();
 }
 
+export function GetSystemStats() {
+  return window['go']['main']['App']['GetSystemStats']();
+}
+
 export function GetUpdateSteps() {
   return window['go']['main']['App']['GetUpdateSteps']();
 }

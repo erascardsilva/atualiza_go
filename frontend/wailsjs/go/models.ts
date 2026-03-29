@@ -24,6 +24,30 @@ export namespace main {
 	        this.hasSnap = source["hasSnap"];
 	    }
 	}
+	export class SystemStats {
+	    memTotal: number;
+	    memUsed: number;
+	    memPercent: number;
+	    diskTotal: string;
+	    diskUsed: string;
+	    diskPercent: number;
+	    diskMessage: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new SystemStats(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.memTotal = source["memTotal"];
+	        this.memUsed = source["memUsed"];
+	        this.memPercent = source["memPercent"];
+	        this.diskTotal = source["diskTotal"];
+	        this.diskUsed = source["diskUsed"];
+	        this.diskPercent = source["diskPercent"];
+	        this.diskMessage = source["diskMessage"];
+	    }
+	}
 	export class UpdateStep {
 	    id: string;
 	    label: string;

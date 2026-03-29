@@ -4,6 +4,8 @@ import {main} from '../models';
 
 export function GetDistroInfo():Promise<main.DistroInfo>;
 
+export function GetSystemStats():Promise<main.SystemStats>;
+
 export function GetUpdateSteps():Promise<Array<main.UpdateStep>>;
 
 export function RunSystemAction(arg1:string):Promise<void>;

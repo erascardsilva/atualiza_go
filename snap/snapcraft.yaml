@@ -1,0 +1,53 @@
+name: atualiza-go
+base: core22
+version: '2.1'
+summary: A modern graphical user interface for Linux system maintenance and updates.
+description: |
+  Atualiza GO is a graphical tool built with Wails to simplify Linux system updates. 
+  It supports major distributions and handles system packages (APT, Pacman, DNF, Zypper, etc.), 
+  as well as Flatpak and Snap ecosystems. It also includes a telemetry dashboard for RAM and Disk monitoring.
+
+grade: stable
+confinement: classic
+
+icon: flatpak/io.github.erascardsilva.atualizago.png
+
+apps:
+  atualiza-go:
+    command: bin/atualiza_go
+    extensions: [gnome]
+    plugs:
+      - network
+      - network-bind
+      - desktop
+      - desktop-legacy
+      - x11
+      - wayland
+      - opengl
+      - home
+
+parts:
+  frontend:
+    plugin: npm
+    source: frontend
+    npm-node-version: 20.x
+    build-packages:
+      - nodejs
+    override-build: |
+      npm install
+      npm run build
+      cp -r dist $SNAPCRAFT_PART_INSTALL/dist
+
+  atualiza-go:
+    after: [frontend]
+    plugin: go
+    source: .
+    go-version: '1.22'
+    build-packages:
+      - libwebkit2gtk-4.0-dev
+      - libgtk-3-dev
+      - pkg-config
+    override-build: |
+      mkdir -p frontend/dist
+      cp -r ../frontend/install/dist/* frontend/dist/
+      go build -o $SNAPCRAFT_PART_INSTALL/bin/atualiza_go .

@@ -6,6 +6,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"os"
 	"os/exec"
 	"strings"
 	"sync"
@@ -41,11 +42,152 @@ func (a *App) GetUpdateSteps() []UpdateStep {
 			Command:  "apt update -y && apt upgrade -y",
 			NeedRoot: true,
 		})
+		steps = append(steps, UpdateStep{
+			ID:       "system_cleanup",
+			Label:    "Limpeza de Sistema (APT)",
+			Command:  "apt clean",
+			NeedRoot: true,
+		})
+		if !distro.HasFlatpak {
+			steps = append(steps, UpdateStep{
+				ID:       "install_flatpak",
+				Label:    "Instalar Suporte Flatpak",
+				Command:  "apt install -y flatpak",
+				NeedRoot: true,
+			})
+		}
+		if !distro.HasSnap {
+			steps = append(steps, UpdateStep{
+				ID:       "install_snap",
+				Label:    "Instalar Suporte Snap",
+				Command:  "apt install -y snapd",
+				NeedRoot: true,
+			})
+		}
 	case "arch":
 		steps = append(steps, UpdateStep{
 			ID:       "system_update",
 			Label:    "Atualizar Sistema (Pacman)",
 			Command:  "pacman -Syu --noconfirm",
+			NeedRoot: true,
+		})
+		steps = append(steps, UpdateStep{
+			ID:       "system_cleanup",
+			Label:    "Limpeza de Sistema (Pacman)",
+			Command:  "pacman -Sc --noconfirm",
+			NeedRoot: true,
+		})
+		if !distro.HasFlatpak {
+			steps = append(steps, UpdateStep{
+				ID:       "install_flatpak",
+				Label:    "Instalar Suporte Flatpak",
+				Command:  "pacman -S --noconfirm flatpak",
+				NeedRoot: true,
+			})
+		}
+		if !distro.HasSnap {
+			steps = append(steps, UpdateStep{
+				ID:       "install_snap",
+				Label:    "Instalar Suporte Snap",
+				Command:  "pacman -S --noconfirm snapd && systemctl enable --now snapd.socket",
+				NeedRoot: true,
+			})
+		}
+	case "fedora":
+		steps = append(steps, UpdateStep{
+			ID:       "system_update",
+			Label:    "Atualizar Sistema (DNF)",
+			Command:  "dnf upgrade -y",
+			NeedRoot: true,
+		})
+		steps = append(steps, UpdateStep{
+			ID:       "system_cleanup",
+			Label:    "Limpeza de Sistema (DNF)",
+			Command:  "dnf clean all",
+			NeedRoot: true,
+		})
+		if !distro.HasFlatpak {
+			steps = append(steps, UpdateStep{
+				ID:       "install_flatpak",
+				Label:    "Instalar Suporte Flatpak",
+				Command:  "dnf install -y flatpak",
+				NeedRoot: true,
+			})
+		}
+		if !distro.HasSnap {
+			steps = append(steps, UpdateStep{
+				ID:       "install_snap",
+				Label:    "Instalar Suporte Snap",
+				Command:  "dnf install -y snapd && systemctl enable --now snapd.socket && ln -s /var/lib/snapd/snap /snap",
+				NeedRoot: true,
+			})
+		}
+	case "suse":
+		steps = append(steps, UpdateStep{
+			ID:       "system_update",
+			Label:    "Atualizar Sistema (Zypper)",
+			Command:  "zypper --non-interactive update --auto-agree-with-licenses",
+			NeedRoot: true,
+		})
+		steps = append(steps, UpdateStep{
+			ID:       "system_cleanup",
+			Label:    "Limpeza de Sistema (Zypper)",
+			Command:  "zypper clean --all",
+			NeedRoot: true,
+		})
+		if !distro.HasFlatpak {
+			steps = append(steps, UpdateStep{
+				ID:       "install_flatpak",
+				Label:    "Instalar Suporte Flatpak",
+				Command:  "zypper --non-interactive install flatpak",
+				NeedRoot: true,
+			})
+		}
+		if !distro.HasSnap {
+			steps = append(steps, UpdateStep{
+				ID:       "install_snap",
+				Label:    "Instalar Suporte Snap",
+				Command:  "zypper --non-interactive install snapd && systemctl enable --now snapd.socket",
+				NeedRoot: true,
+			})
+		}
+	case "alpine":
+		steps = append(steps, UpdateStep{
+			ID:       "system_update",
+			Label:    "Atualizar Sistema (APK)",
+			Command:  "apk update && apk upgrade",
+			NeedRoot: true,
+		})
+		steps = append(steps, UpdateStep{
+			ID:       "system_cleanup",
+			Label:    "Limpeza de Sistema (APK)",
+			Command:  "apk cache clean",
+			NeedRoot: true,
+		})
+	case "void":
+		steps = append(steps, UpdateStep{
+			ID:       "system_update",
+			Label:    "Atualizar Sistema (XBPS)",
+			Command:  "xbps-install -Syu --yes",
+			NeedRoot: true,
+		})
+		steps = append(steps, UpdateStep{
+			ID:       "system_cleanup",
+			Label:    "Limpeza de Sistema (XBPS)",
+			Command:  "xbps-remove -O",
+			NeedRoot: true,
+		})
+	case "solus":
+		steps = append(steps, UpdateStep{
+			ID:       "system_update",
+			Label:    "Atualizar Sistema (EOPKG)",
+			Command:  "eopkg upgrade -y",
+			NeedRoot: true,
+		})
+		steps = append(steps, UpdateStep{
+			ID:       "system_cleanup",
+			Label:    "Limpeza de Sistema (EOPKG)",
+			Command:  "eopkg delete-cache",
 			NeedRoot: true,
 		})
 	}
@@ -63,7 +205,7 @@ func (a *App) GetUpdateSteps() []UpdateStep {
 		steps = append(steps, UpdateStep{
 			ID:       "snap_update",
 			Label:    "Atualizar Snap",
-			Command:  "snap refresh",
+			Command:  "snap wait system seed && snap refresh",
 			NeedRoot: true,
 		})
 	}
@@ -94,10 +236,26 @@ func (a *App) RunUpdate(stepIDs []string) {
 func (a *App) executeStep(step UpdateStep) {
 	var cmd *exec.Cmd
 
+	inSandbox := false
+	if _, err := os.Stat("/.flatpak-info"); err == nil {
+		inSandbox = true
+	}
+
+	command := step.Command
 	if step.NeedRoot {
-		cmd = exec.Command("pkexec", "bash", "-c", step.Command)
+		command = "pkexec bash -c '" + step.Command + "'"
+	}
+
+	if inSandbox {
+		// No sandbox, usamos flatpak-spawn para rodar o comando no host
+		// Nota: flatpak-spawn --host já lida com a saída e entrada se configurado
+		cmd = exec.Command("flatpak-spawn", "--host", "bash", "-c", command)
 	} else {
-		cmd = exec.Command("bash", "-c", step.Command)
+		if step.NeedRoot {
+			cmd = exec.Command("pkexec", "bash", "-c", step.Command)
+		} else {
+			cmd = exec.Command("bash", "-c", step.Command)
+		}
 	}
 
 	stdout, err := cmd.StdoutPipe()
@@ -185,24 +343,51 @@ func (a *App) executeStep(step UpdateStep) {
 func estimateProgress(stepID string, lineCount int, line string) float64 {
 	lower := strings.ToLower(line)
 
-	if strings.Contains(lower, "reading package") || strings.Contains(lower, ":: synchronizing") {
+	// Início / Sincronização
+	if strings.Contains(lower, "reading package") ||
+		strings.Contains(lower, ":: synchronizing") ||
+		strings.Contains(lower, "metadata expiration check") ||
+		strings.Contains(lower, "fetching") ||
+		strings.Contains(lower, "updating repository") {
 		return 10
 	}
-	if strings.Contains(lower, "building dependency") || strings.Contains(lower, "resolving dependencies") {
+
+	// Dependências / Resolução
+	if strings.Contains(lower, "building dependency") ||
+		strings.Contains(lower, "resolving dependencies") ||
+		strings.Contains(lower, "checking for conflicts") ||
+		strings.Contains(lower, "transaction check") {
 		return 20
 	}
+
+	// Confirmação / Download
 	if strings.Contains(lower, "the following packages will be upgraded") ||
-		strings.Contains(lower, "packages to install") {
-		return 30
+		strings.Contains(lower, "packages to install") ||
+		strings.Contains(lower, "total download size") ||
+		strings.Contains(lower, "downloading") {
+		return 35
 	}
-	if strings.Contains(lower, "unpacking") || strings.Contains(lower, "installing") {
+
+	// Instalação / Descompactação
+	if strings.Contains(lower, "unpacking") ||
+		strings.Contains(lower, "installing") ||
+		strings.Contains(lower, "upgrading") ||
+		strings.Contains(lower, "extracting") {
 		return 50 + float64(lineCount%30)
 	}
-	if strings.Contains(lower, "setting up") || strings.Contains(lower, "configuring") {
-		return 70 + float64(lineCount%20)
+
+	// Configuração / Triggers
+	if strings.Contains(lower, "setting up") ||
+		strings.Contains(lower, "configuring") ||
+		strings.Contains(lower, "running transaction") ||
+		strings.Contains(lower, "verifying") {
+		return 80 + float64(lineCount%15)
 	}
-	if strings.Contains(lower, "processing triggers") {
-		return 90
+
+	if strings.Contains(lower, "processing triggers") ||
+		strings.Contains(lower, "cleanup") ||
+		strings.Contains(lower, "complete!") {
+		return 95
 	}
 
 	base := float64(lineCount) * 0.5
@@ -215,13 +400,25 @@ func estimateProgress(stepID string, lineCount int, line string) float64 {
 func (a *App) RunSystemAction(action string) error {
 	var cmd *exec.Cmd
 
+	inSandbox := false
+	if _, err := os.Stat("/.flatpak-info"); err == nil {
+		inSandbox = true
+	}
+
+	command := ""
 	switch action {
 	case "reboot":
-		cmd = exec.Command("pkexec", "systemctl", "reboot")
+		command = "systemctl reboot"
 	case "shutdown":
-		cmd = exec.Command("pkexec", "systemctl", "poweroff")
+		command = "systemctl poweroff"
 	default:
 		return fmt.Errorf("ação desconhecida: %s", action)
+	}
+
+	if inSandbox {
+		cmd = exec.Command("flatpak-spawn", "--host", "pkexec", "bash", "-c", command)
+	} else {
+		cmd = exec.Command("pkexec", "bash", "-c", command)
 	}
 
 	return cmd.Run()

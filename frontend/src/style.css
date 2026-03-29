@@ -1,3 +1,6 @@
+/* Atualiza GO - Design System */
+/* Erasmo Cardoso - Dev */
+
 *,
 *::before,
 *::after {
@@ -241,7 +244,7 @@ body {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
-    padding: 32px;
+    padding: 24px 32px;
     display: flex;
     align-items: center;
     gap: 24px;
@@ -296,10 +299,74 @@ body {
     text-transform: capitalize;
 }
 
+/* ═══════ DASHBOARD ═══════ */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stats-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stats-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stats-icon {
+    font-size: 20px;
+}
+
+.stats-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    flex: 1;
+}
+
+.stats-value {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.stats-bar-bg {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.stats-bar-fill {
+    height: 100%;
+    background: var(--accent-gradient);
+    width: 0%;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stats-bar-fill.warning {
+    background: linear-gradient(90deg, var(--warning), #f59e0b);
+}
+
+.stats-bar-fill.danger {
+    background: linear-gradient(90deg, var(--danger), #ef4444);
+}
+
 /* ═══════ FEATURES GRID ═══════ */
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 16px;
 }
 
@@ -309,20 +376,20 @@ body {
     border-radius: var(--radius);
     padding: 20px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    gap: 8px;
-    text-align: center;
+    gap: 12px;
     transition: var(--transition);
 }
 
-.feature-card:hover {
-    border-color: var(--border-active);
-    transform: translateY(-2px);
+.feature-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .feature-icon {
-    font-size: 28px;
+    font-size: 24px;
 }
 
 .feature-label {
@@ -331,10 +398,11 @@ body {
 }
 
 .feature-status {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
-    padding: 2px 10px;
-    border-radius: 12px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 8px;
 }
 
 .feature-status.available {
@@ -345,6 +413,29 @@ body {
 .feature-status.unavailable {
     color: var(--text-muted);
     background: rgba(255, 255, 255, 0.03);
+}
+
+.feature-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-install {
+    padding: 6px 12px;
+    background: var(--accent-glow);
+    border: 1px solid var(--border-active);
+    color: var(--accent-light);
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.btn-install:hover {
+    background: var(--accent);
+    color: white;
 }
 
 /* ═══════ UPDATE PAGE ═══════ */
@@ -870,4 +961,35 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: 0.5px;
+}
+
+/* ═══════ LANGUAGE SELECTOR ═══════ */
+.btn-lang {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.btn-lang:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    border-color: var(--border-active);
+    transform: translateY(-1px);
+}
+
+.btn-lang:active {
+    transform: scale(0.98);
 }

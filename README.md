@@ -1,108 +1,99 @@
 # Atualiza GO
 
-Ferramenta gráfica para atualização de sistemas Linux, construída com [Wails](https://wails.io) (Go + WebView).
+[![Snap Store](https://badgen.net/badge/snap/store/blue)](https://snapcraft.io/atualiza-go)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Detecta automaticamente a distribuição e disponibiliza as opções de atualização adequadas para o sistema.
+A modern graphical user interface for Linux system maintenance and updates, built with [Wails](https://wails.io) (Go + Webview).
 
-## Funcionalidades
+**Atualiza GO** automatically detects your Linux distribution and provides the appropriate update options, including system packages, Flatpak, and Snap ecosystems.
 
-- Detecção automática da distribuição Linux
-- Suporte a Debian/Ubuntu e Arch/Manjaro (e derivados)
-- Atualização de pacotes do sistema (APT / Pacman)
-- Atualização de Flatpak e Snap (quando disponíveis)
-- Barras de progresso em tempo real
-- Reiniciar e desligar com confirmação
-- Autenticação gráfica via `pkexec` (Polkit)
+## Features
 
-## Arquitetura
+- **Robust Detection**: Identifies host distribution via `/etc/os-release` with falling back to package manager binaries.
+- **Multi-distro Support**: Native support for Debian, Arch, Fedora, openSUSE, Alpine, Void, and Solus families.
+- **Bilingual UI**: Dynamic language switching between Portuguese (PT-BR) and English (EN).
+- **Comprehensive Updates**: Manages APT, Pacman, DNF, Zypper, APK, XBPS, and EOPKG.
+- **Ecosystem Management**: Detects and updates Flatpak and Snap applications.
+- **Telemetry Dashboard**: Real-time monitoring of RAM and Disk usage.
+- **Safe Maintenance**: Built-in system cleanup to remove temporary package caches safely.
+- **Power Management**: Reboot and Shutdown integration with confirmation prompts.
+- **Security**: Graphical authorization via `pkexec` (Polkit).
+
+## Installation
+
+### Snap Store (Recommended)
+
+Install the official Snap package with classic confinement for full system access:
+
+```bash
+sudo snap install atualiza-go --classic
+```
+
+### Flatpak
+
+Download the latest release and install via:
+
+```bash
+flatpak install io.github.erascardsilva.atualizago.flatpak
+```
+
+### Build from Source
+
+#### Prerequisites
+- Go 1.21+
+- Wails CLI v2
+- WebKitGTK development files (e.g., `libwebkit2gtk-4.0-dev`)
+- Polkit (for `pkexec`)
+
+#### Compilation
+```bash
+# Install Wails CLI
+go install github.com/wailsapp/wails/v2/cmd/wails@latest
+
+# Build the project
+wails build
+```
+
+## Architecture
 
 ```
 atualiza_go/
-├── main.go          # Entry point Wails (janela, bindings)
-├── app.go           # Struct App principal
-├── distro.go        # Detecção de distro via /etc/os-release
-├── updater.go       # Motor de atualização + streaming de progresso
+├── main.go          # Wails entry point (window, bindings)
+├── app.go           # Core App struct and lifecycle
+├── distro.go        # Multi-distro detection logic
+├── sysinfo.go       # System telemetry (RAM/Disk)
+├── updater.go       # Update engine and progress streaming
 ├── frontend/
-│   ├── index.html   # Layout (sidebar + páginas)
+│   ├── index.html   # High-fidelity UI layout
 │   └── src/
-│       ├── style.css  # Tema escuro, animações, barras de progresso
-│       └── main.js    # Navegação, bindings Wails, eventos
+│       ├── translations.js # i18n dictionary
+│       ├── style.css       # Design System (Glassmorphism)
+│       └── main.js         # Reactive UI logic and Wails bindings
 ├── build/
 │   └── bin/
-│       └── atualiza_go  # Binário compilado
-└── wails.json       # Configuração Wails
+│       └── atualiza_go     # Final compiled binary
+└── snap/
+    └── snapcraft.yaml      # Snap packaging configuration
 ```
 
-### Fluxo
+## Supported Distributions
 
-```
-┌──────────────┐     bindings      ┌──────────────┐
-│   Frontend   │ ◄══════════════► │   Backend Go  │
-│  HTML/CSS/JS │                   │               │
-│              │   EventsEmit()    │  distro.go    │
-│  Progresso ◄─┤◄─────────────────┤  updater.go   │
-│  Log output  │                   │  app.go       │
-└──────────────┘                   └───────┬───────┘
-                                           │
-                                    pkexec │ bash -c
-                                           ▼
-                                   ┌───────────────┐
-                                   │  apt / pacman  │
-                                   │  flatpak / snap│
-                                   └───────────────┘
-```
+| Family | Examples | Package Manager |
+|:---:|:---|:---:|
+| **Debian** | Debian, Ubuntu, Mint, Pop!_OS, Zorin, Kali, MX | `apt` |
+| **Arch** | Arch, Manjaro, EndeavourOS, Garuda, CachyOS | `pacman` |
+| **Fedora** | Fedora, RHEL, CentOS, AlmaLinux, Rocky | `dnf` |
+| **openSUSE**| Tumbleweed, Leap, SLES | `zypper` |
+| **Alpine** | Alpine Linux | `apk` |
+| **Void** | Void Linux | `xbps` |
+| **Solus** | Solus OS | `eopkg` |
 
-### Backend
+## Usage
 
-| Arquivo | Responsabilidade |
-|---------|-----------------|
-| `main.go` | Inicialização Wails, configuração de janela |
-| `app.go` | Struct App, expõe `GetDistroInfo()` ao frontend |
-| `distro.go` | Lê `/etc/os-release`, identifica família e gerenciador de pacotes |
-| `updater.go` | Executa comandos via `pkexec`, streaming de stdout via `EventsEmit` |
-
-### Frontend
-
-| Arquivo | Responsabilidade |
-|---------|-----------------|
-| `index.html` | Layout com sidebar + 4 páginas (Início, Atualizar, Ações, Sobre) |
-| `style.css` | Design system: tema escuro, glassmorphism, animações |
-| `main.js` | Navegação SPA, bindings Wails, barras de progresso, modais |
-
-## Distros Suportadas
-
-| Família | Distros | Gerenciador |
-|---------|---------|-------------|
-| Debian | Debian, Ubuntu, Mint, Pop!_OS, Elementary, Zorin, Kali, MX, Deepin | `apt` |
-| Arch | Arch, Manjaro, EndeavourOS, Garuda, ArcoLinux, Artix, CachyOS | `pacman` |
-
-## Requisitos
-
-- Go 1.21+
-- Wails CLI v2
-- WebKitGTK (libwebkit2gtk-4.0-dev ou equivalente)
-- Polkit (para `pkexec`)
-
-## Build
-
-```bash
-# Instalar Wails CLI
-go install github.com/wailsapp/wails/v2/cmd/wails@latest
-
-# Compilar
-wails build
-
-# Ou modo desenvolvimento (hot reload)
-wails dev
-```
-
-## Uso
-
-```bash
-./build/bin/atualiza_go
-```
-
-O app abre e detecta seu sistema automaticamente. Selecione as atualizações desejadas e clique em "Iniciar Atualização". O `pkexec` pedirá sua senha quando necessário.
+1. Launch the application.
+2. The dashboard will automatically detect your system resources and distribution.
+3. Go to the **Update** tab, select the desired maintenance tasks, and click **Start Update**.
+4. Authenticate via Polkit when prompted.
 
 ---
 

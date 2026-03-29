@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- Atualiza GO - Interface Principal -->
+<!-- Erasmo Cardoso - Dev -->
 <html lang="pt-BR">
 
 <head>
@@ -23,36 +25,39 @@
             <nav id="nav-menu">
                 <button class="nav-item active" data-page="home">
                     <span class="nav-icon">🏠</span>
-                    <span class="nav-label">Início</span>
+                    <span class="nav-label" data-i18n="nav_home">Início</span>
                 </button>
                 <button class="nav-item" data-page="update">
                     <span class="nav-icon">🔄</span>
-                    <span class="nav-label">Atualizar</span>
+                    <span class="nav-label" data-i18n="nav_update">Atualizar</span>
                 </button>
                 <button class="nav-item" data-page="actions">
                     <span class="nav-icon">⚡</span>
-                    <span class="nav-label">Ações</span>
+                    <span class="nav-label" data-i18n="nav_actions">Ações</span>
                 </button>
                 <button class="nav-item" data-page="about">
                     <span class="nav-icon">ℹ️</span>
-                    <span class="nav-label">Sobre</span>
+                    <span class="nav-label" data-i18n="nav_about">Sobre</span>
                 </button>
             </nav>
             <div class="sidebar-footer">
-                <div class="version-tag">v2.0</div>
+                <button id="btn-lang" class="btn-lang">
+                    <span class="lang-text">PT / EN</span>
+                </button>
+                <div class="version-tag">v2.1</div>
             </div>
         </aside>
 
         <main id="content">
             <section id="page-home" class="page active">
                 <div class="page-header">
-                    <h1>Sistema Detectado</h1>
-                    <p class="page-subtitle">Informações do seu sistema</p>
+                    <h1 data-i18n="home_title">Sistema Detectado</h1>
+                    <p class="page-subtitle" data-i18n="home_subtitle">Informações do seu sistema</p>
                 </div>
                 <div class="distro-card">
                     <div class="distro-icon" id="distro-icon">🐧</div>
                     <div class="distro-details">
-                        <h2 id="distro-name">Detectando...</h2>
+                        <h2 id="distro-name" data-i18n="distro_detecting">Detectando...</h2>
                         <div class="distro-meta">
                             <span class="meta-badge" id="distro-family">—</span>
                             <span class="meta-badge" id="distro-version">—</span>
@@ -60,38 +65,68 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="dashboard-grid">
+                    <div class="stats-card">
+                        <div class="stats-header">
+                            <span class="stats-icon">🧠</span>
+                            <span class="stats-label" data-i18n="stats_ram">Memória RAM</span>
+                            <span class="stats-value" id="ram-usage">— / —</span>
+                        </div>
+                        <div class="stats-bar-bg">
+                            <div class="stats-bar-fill" id="ram-bar"></div>
+                        </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-header">
+                            <span class="stats-icon">💾</span>
+                            <span class="stats-label" data-i18n="stats_disk">Disco Rígido (/)</span>
+                            <span class="stats-value" id="disk-usage">— / —</span>
+                        </div>
+                        <div class="stats-bar-bg">
+                            <div class="stats-bar-fill" id="disk-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="features-grid">
                     <div class="feature-card" id="feat-flatpak">
-                        <span class="feature-icon">📦</span>
-                        <span class="feature-label">Flatpak</span>
-                        <span class="feature-status" id="flatpak-status">—</span>
+                        <div class="feature-main">
+                            <span class="feature-icon">📦</span>
+                            <span class="feature-label" data-i18n="feat_flatpak">Flatpak</span>
+                            <span class="feature-status" id="flatpak-status">—</span>
+                        </div>
+                        <div class="feature-actions" id="flatpak-actions"></div>
                     </div>
                     <div class="feature-card" id="feat-snap">
-                        <span class="feature-icon">🔷</span>
-                        <span class="feature-label">Snap</span>
-                        <span class="feature-status" id="snap-status">—</span>
+                        <div class="feature-main">
+                            <span class="feature-icon">🔷</span>
+                            <span class="feature-label" data-i18n="feat_snap">Snap</span>
+                            <span class="feature-status" id="snap-status">—</span>
+                        </div>
+                        <div class="feature-actions" id="snap-actions"></div>
                     </div>
                 </div>
             </section>
 
             <section id="page-update" class="page">
                 <div class="page-header">
-                    <h1>Atualizar Sistema</h1>
-                    <p class="page-subtitle">Selecione as atualizações</p>
+                    <h1 data-i18n="update_title">Atualizar Sistema</h1>
+                    <p class="page-subtitle" data-i18n="update_subtitle">Selecione as atualizações</p>
                 </div>
                 <div id="update-options" class="update-options"></div>
                 <div class="update-actions">
                     <button id="btn-update" class="btn-primary" disabled>
                         <span class="btn-icon">▶</span>
-                        Iniciar Atualização
+                        <span data-i18n="btn_start_update">Iniciar Atualização</span>
                     </button>
                 </div>
                 <div id="progress-area" class="progress-area hidden">
                     <div id="progress-steps"></div>
                     <div class="log-container">
                         <div class="log-header">
-                            <span>Log de Saída</span>
-                            <button id="btn-clear-log" class="btn-small">Limpar</button>
+                            <span data-i18n="log_title">Log de Saída</span>
+                            <button id="btn-clear-log" class="btn-small" data-i18n="btn_clear_log">Limpar</button>
                         </div>
                         <div id="log-output" class="log-output"></div>
                     </div>
@@ -100,49 +135,49 @@
 
             <section id="page-actions" class="page">
                 <div class="page-header">
-                    <h1>Ações do Sistema</h1>
-                    <p class="page-subtitle">Após a atualização</p>
+                    <h1 data-i18n="actions_title">Ações do Sistema</h1>
+                    <p class="page-subtitle" data-i18n="actions_subtitle">Após a atualização</p>
                 </div>
                 <div class="actions-grid">
                     <button class="action-card" id="btn-reboot">
                         <span class="action-icon">🔁</span>
-                        <span class="action-label">Reiniciar</span>
-                        <span class="action-desc">Reiniciar o sistema</span>
+                        <span class="action-label" data-i18n="action_reboot_label">Reiniciar</span>
+                        <span class="action-desc" data-i18n="action_reboot_desc">Reiniciar o sistema</span>
                     </button>
                     <button class="action-card danger" id="btn-shutdown">
                         <span class="action-icon">⏻</span>
-                        <span class="action-label">Desligar</span>
-                        <span class="action-desc">Desligar o sistema</span>
+                        <span class="action-label" data-i18n="action_shutdown_label">Desligar</span>
+                        <span class="action-desc" data-i18n="action_shutdown_desc">Desligar o sistema</span>
                     </button>
                 </div>
             </section>
 
             <section id="page-about" class="page">
                 <div class="page-header">
-                    <h1>Sobre</h1>
-                    <p class="page-subtitle">Atualiza GO — Atualizador de Sistema Linux</p>
+                    <h1 data-i18n="about_title">Sobre</h1>
+                    <p class="page-subtitle" data-i18n="about_subtitle">Atualiza GO — Atualizador de Sistema Linux</p>
                 </div>
                 <div class="about-card">
                     <div class="about-section">
-                        <h3>Como Usar</h3>
+                        <h3 data-i18n="how_to_use">Como Usar</h3>
                         <ol class="about-steps">
-                            <li>Na tela <strong>Início</strong>, confira se o sistema foi detectado corretamente.</li>
-                            <li>Acesse <strong>Atualizar</strong> e selecione os pacotes que deseja atualizar (Sistema,
+                            <li data-i18n="step_1">Na tela <strong>Início</strong>, confira se o sistema foi detectado corretamente.</li>
+                            <li data-i18n="step_2">Acesse <strong>Atualizar</strong> e selecione os pacotes que deseja atualizar (Sistema,
                                 Flatpak, Snap).</li>
-                            <li>Clique em <strong>Iniciar Atualização</strong>. O sistema pedirá sua senha via
+                            <li data-i18n="step_3">Clique em <strong>Iniciar Atualização</strong>. O sistema pedirá sua senha via
                                 autenticação gráfica.</li>
-                            <li>Acompanhe o progresso pelas barras e pelo log de saída em tempo real.</li>
-                            <li>Após concluir, use a tela <strong>Ações</strong> para reiniciar ou desligar, se
+                            <li data-i18n="step_4">Acompanhe o progresso pelas barras e pelo log de saída em tempo real.</li>
+                            <li data-i18n="step_5">Após concluir, use a tela <strong>Ações</strong> para reiniciar ou desligar, se
                                 necessário.</li>
                         </ol>
                     </div>
                     <div class="about-section">
-                        <h3>Distros Suportadas</h3>
-                        <p>Debian, Ubuntu, Mint, Pop!_OS, Arch, Manjaro, EndeavourOS e derivados.</p>
+                        <h3 data-i18n="distros_supported">Distros Suportadas</h3>
+                        <p data-i18n="distros_list">Debian, Ubuntu, Arch, Fedora, openSUSE e derivados.</p>
                     </div>
                     <div class="about-section">
-                        <h3>Tecnologias</h3>
-                        <p>Go + Wails v2 ∙ HTML/CSS/JS ∙ pkexec (Polkit)</p>
+                        <h3 data-i18n="tech_title">Tecnologias</h3>
+                        <p data-i18n="tech_list">Go + Wails v2 ∙ HTML/CSS/JS ∙ pkexec (Polkit)</p>
                     </div>
                 </div>
                 <div class="about-signature">
