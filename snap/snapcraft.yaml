@@ -15,7 +15,6 @@ icon: flatpak/io.github.erascardsilva.atualizago.png
 apps:
   atualiza-go:
     command: bin/atualiza_go
-    extensions: [gnome]
     plugs:
       - network
       - network-bind
@@ -47,6 +46,10 @@ parts:
       - libwebkit2gtk-4.0-dev
       - libgtk-3-dev
       - pkg-config
+    stage-packages:
+      - libwebkit2gtk-4.0-37
+      - libgtk-3-0
+      - libglib2.0-0
     override-build: |
       mkdir -p frontend/dist
       cp -r ../frontend/install/dist/* frontend/dist/
