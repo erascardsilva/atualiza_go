@@ -1,6 +1,6 @@
 name: atualiza-go
 base: core22
-version: '2.2'
+version: '2.3'
 summary: A modern graphical user interface for Linux system maintenance and updates.
 description: |
   Atualiza GO is a graphical tool built with Wails to simplify Linux system updates. 
@@ -8,7 +8,7 @@ description: |
   as well as Flatpak and Snap ecosystems. It also includes a telemetry dashboard for RAM and Disk monitoring.
 
 grade: devel
-confinement: classic
+confinement: strict
 
 title: Atualiza GO
 license: GPL-3.0
@@ -18,6 +18,16 @@ icon: snap/gui/atualiza-go.png
 apps:
   atualiza-go:
     command: bin/atualiza_go
+    plugs:
+      - network
+      - network-bind
+      - desktop
+      - desktop-legacy
+      - x11
+      - wayland
+      - opengl
+      - home
+      - gsettings
 
 
 parts:
