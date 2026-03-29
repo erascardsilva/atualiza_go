@@ -26,27 +26,16 @@ apps:
       - home
 
 parts:
-  frontend:
-    plugin: npm
-    source: frontend
-    npm-node-version: 20.x
-    npm-include-node: true
-    build-packages:
-      - nodejs
-    override-build: |
-      npm install
-      npm run build
-      cp -r dist $SNAPCRAFT_PART_INSTALL/dist
-
   atualiza-go:
-    after: [frontend]
-    plugin: go
+    plugin: nil
     source: .
     build-snaps:
       - go/1.22/stable
+      - node/20/stable
     build-environment:
       - GOTOOLCHAIN: local
     build-packages:
+      - build-essential
       - libwebkit2gtk-4.0-dev
       - libgtk-3-dev
       - pkg-config
@@ -55,6 +44,15 @@ parts:
       - libgtk-3-0
       - libglib2.0-0
     override-build: |
-      mkdir -p frontend/dist
-      cp -r $SNAPCRAFT_STAGE/dist/* frontend/dist/
-      go build -o $SNAPCRAFT_PART_INSTALL/bin/atualiza_go .
+      # Instala o Wails CLI
+      go install github.com/wailsapp/wails/v2/cmd/wails@latest
+      
+      # Build do Frontend (NPM)
+      npm install --prefix frontend
+      
+      # Build do Aplicativo com Wails (usando tags para webkit 4.0 do core22)
+      ~/go/bin/wails build -m -tags webkit2_40 -nsis=false -upx=false -trimpath -o atualiza_go
+      
+      # Instalação no diretório do Snap
+      mkdir -p $SNAPCRAFT_PART_INSTALL/bin
+      cp build/bin/atualiza_go $SNAPCRAFT_PART_INSTALL/bin/atualiza_go
