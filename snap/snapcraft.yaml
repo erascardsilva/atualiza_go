@@ -10,8 +10,11 @@ description: |
 grade: stable
 confinement: classic
 
-icon: flatpak/io.github.erascardsilva.atualizago.png
-
+title: Atualiza GO
+license: GPL-3.0
+architectures:
+  - amd64
+icon: snap/gui/atualiza-go.png
 apps:
   atualiza-go:
     command: bin/atualiza_go
