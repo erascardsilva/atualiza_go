@@ -1,6 +1,6 @@
 name: atualiza-go
 base: core22
-version: '2.4'
+version: '2.5'
 summary: A modern graphical user interface for Linux system maintenance and updates.
 description: |
   Atualiza GO is a graphical tool built with Wails to simplify Linux system updates. 
@@ -18,16 +18,11 @@ icon: snap/gui/atualiza-go.png
 apps:
   atualiza-go:
     command: bin/atualiza_go
+    extensions: [gnome]
     plugs:
       - network
       - network-bind
-      - desktop
-      - desktop-legacy
-      - x11
-      - wayland
-      - opengl
       - home
-      - gsettings
 
 
 parts:
@@ -45,11 +40,7 @@ parts:
       - libwebkit2gtk-4.0-dev
       - libgtk-3-dev
       - pkg-config
-    stage-packages:
-      - libwebkit2gtk-4.0-37
-      - libgtk-3-0
-      - libglib2.0-0
-      - libglu1-mesa
+    stage-packages: []
     override-build: |
       # Instala o Wails CLI
       go install github.com/wailsapp/wails/v2/cmd/wails@latest
