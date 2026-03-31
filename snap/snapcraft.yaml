@@ -22,6 +22,8 @@ apps:
       - gnome
     environment:
       WEBKIT_DISABLE_SANDBOX: "1"
+      WEBKIT_DISABLE_COMPOSITING_MODE: "1"
+      LIBGL_ALWAYS_SOFTWARE: "1"
     plugs:
       - browser-support
       - desktop
