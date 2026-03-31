@@ -18,6 +18,8 @@ icon: snap/gui/atualiza-go.png
 apps:
   atualiza-go:
     command: bin/atualiza_go
+    environment:
+      WEBKIT_DISABLE_SANDBOX: "1"
     plugs:
       - desktop
       - desktop-legacy
