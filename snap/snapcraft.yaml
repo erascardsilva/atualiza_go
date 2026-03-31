@@ -58,6 +58,8 @@ parts:
       - libwebkit2gtk-4.0-37
       - libgtk-3-0
       - libglib2.0-0
+      - libcanberra-gtk3-module
+      - libcanberra-gtk-module
     override-build: |
       # Instala o Wails CLI
       go install github.com/wailsapp/wails/v2/cmd/wails@latest
