@@ -21,12 +21,28 @@ A modern graphical user interface for Linux system maintenance and updates, buil
 
 ## Installation
 
-### Snap Store (Recommended)
-
-Install the official Snap package with classic confinement for full system access:
+### Native Packages (.deb / .rpm) (Recommended)
+Download the `.deb` or `.rpm` installer from the [GitHub Releases](https://github.com/erascardsilva/atualiza_go/releases/latest) page for full system access and menu integration.
 
 ```bash
-sudo snap install atualiza-go --classic
+# Debian / Ubuntu
+sudo dpkg -i atualiza-go_linux_amd64.deb
+
+# Fedora / openSUSE
+sudo rpm -i atualiza-go_linux_amd64.rpm
+```
+
+### Portable Executable
+If you downloaded the generic executable file from the Releases page, you just need to give it permissions and run it:
+```bash
+chmod +x atualiza_go
+./atualiza_go
+```
+
+### Snap Store (Sandbox / Read-Only)
+Install the official Snap package. Note that under Canonical rules, this version runs in a sandbox (`strict` confinement) and acts as a **Read-Only Status Dashboard**, unable to modify your host system:
+```bash
+sudo snap install atualiza-go
 ```
 
 ### Flatpak
