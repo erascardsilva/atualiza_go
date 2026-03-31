@@ -17,9 +17,8 @@ import (
 var assets embed.FS
 
 func main() {
-	// OBRIGA O STARTUP GTK A CORTAR TODA RENDERIZAÇÃO WAYLAND/HARDWARE
+	// OBRIGA O STARTUP GTK A CORTAR TODA RENDERIZAÇÃO WAYLAND/HARDWARE EGL
 	// Essencial para sobreviver ao bloqueio do Webkit/Core22 ACPI e EGL.
-	os.Setenv("GDK_BACKEND", "x11")
 	os.Setenv("WEBKIT_DISABLE_COMPOSITING_MODE", "1")
 	os.Setenv("LIBGL_ALWAYS_SOFTWARE", "1")
 	
