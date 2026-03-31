@@ -26,6 +26,7 @@ apps:
       LIBGL_ALWAYS_SOFTWARE: "1"
     plugs:
       - browser-support
+      - audio-playback
       - desktop
       - desktop-legacy
       - x11
