@@ -22,6 +22,8 @@ func main() {
 	os.Setenv("WEBKIT_DISABLE_SANDBOX", "1")
 	os.Setenv("WEBKIT_DISABLE_COMPOSITING_MODE", "1")
 	os.Setenv("LIBGL_ALWAYS_SOFTWARE", "1")
+	// EXTERMINA MÓDULOS DE BIP (canberra-gtk) DO GTK2 injetados pela loja para não matarem a GLib GTK3 do Wails.
+	os.Setenv("GTK_MODULES", "")
 	
 	app := NewApp()
 
