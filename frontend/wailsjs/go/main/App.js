@@ -14,6 +14,10 @@ export function GetUpdateSteps() {
   return window['go']['main']['App']['GetUpdateSteps']();
 }
 
+export function IsRestrictedSandbox() {
+  return window['go']['main']['App']['IsRestrictedSandbox']();
+}
+
 export function RunSystemAction(arg1) {
   return window['go']['main']['App']['RunSystemAction'](arg1);
 }

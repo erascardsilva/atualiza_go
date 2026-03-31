@@ -1,7 +1,7 @@
 /* Atualiza GO - Lógica Principal do Frontend */
 /* Erasmo Cardoso - Dev */
 
-import { GetDistroInfo, GetUpdateSteps, RunUpdate, RunSystemAction, GetSystemStats } from '../wailsjs/go/main/App';
+import { GetDistroInfo, GetUpdateSteps, RunUpdate, RunSystemAction, GetSystemStats, IsRestrictedSandbox } from '../wailsjs/go/main/App';
 import { EventsOn } from '../wailsjs/runtime/runtime';
 import { translations } from './translations';
 import './style.css';
@@ -22,6 +22,7 @@ async function init() {
     setupLanguageToggle();
     applyTranslations();
     await loadDistroInfo();
+    await checkSandboxMode();
     await loadUpdateSteps();
     listenProgress();
     
@@ -53,6 +54,27 @@ function applyTranslations() {
         } else {
             btnUpdate.innerHTML = `<span class="btn-icon">⏳</span> ${t('updating_label')}`;
         }
+    }
+}
+
+async function checkSandboxMode() {
+    try {
+        const isSandbox = await IsRestrictedSandbox();
+        if (isSandbox) {
+            const banner = document.getElementById('sandbox-banner');
+            if (banner) banner.classList.remove('hidden');
+            
+            // Trava o motor inteiro
+            state.running = true;
+            
+            const btnUpdate = document.getElementById('btn-update');
+            if (btnUpdate) {
+                btnUpdate.disabled = true;
+                btnUpdate.innerHTML = `<span class="btn-icon">🚫</span> Restrito`;
+            }
+        }
+    } catch(err) {
+        console.error('Sandbox detect error:', err);
     }
 }
 

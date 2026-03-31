@@ -5,6 +5,7 @@ package main
 
 import (
 	"context"
+	"os"
 )
 
 type App struct {
@@ -21,4 +22,9 @@ func (a *App) startup(ctx context.Context) {
 
 func (a *App) GetDistroInfo() DistroInfo {
 	return detectDistro()
+}
+
+func (a *App) IsRestrictedSandbox() bool {
+	snapEnv := os.Getenv("SNAP")
+	return snapEnv != ""
 }

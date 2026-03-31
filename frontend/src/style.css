@@ -993,3 +993,60 @@ body {
 .btn-lang:active {
     transform: scale(0.98);
 }
+
+/* ═══════ SANDBOX BANNER ═══════ */
+.sandbox-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(251, 191, 36, 0.15);
+    border: 1px solid var(--warning);
+    border-radius: var(--radius-lg);
+    padding: 16px 24px;
+    margin-bottom: 24px;
+    gap: 20px;
+    animation: fadeIn 0.4s ease;
+}
+
+.sandbox-banner.hidden {
+    display: none;
+}
+
+.sandbox-banner-icon {
+    font-size: 32px;
+}
+
+.sandbox-banner-content {
+    flex: 1;
+}
+
+.sandbox-banner-content h3 {
+    color: var(--warning);
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.sandbox-banner-content p {
+    color: var(--text-primary);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.btn-sandbox-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--warning);
+    color: #000;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.btn-sandbox-link:hover {
+    background: #fcd34d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+}

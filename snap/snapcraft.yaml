@@ -8,7 +8,7 @@ description: |
   as well as Flatpak and Snap ecosystems. It also includes a telemetry dashboard for RAM and Disk monitoring.
 
 grade: devel
-confinement: classic
+confinement: strict
 
 title: Atualiza GO
 license: GPL-3.0
@@ -18,6 +18,17 @@ icon: snap/gui/atualiza-go.png
 apps:
   atualiza-go:
     command: bin/atualiza_go
+    plugs:
+      - desktop
+      - desktop-legacy
+      - x11
+      - wayland
+      - opengl
+      - network
+      - network-bind
+      - hardware-observe
+      - system-observe
+      - mount-observe
 
 
 parts:

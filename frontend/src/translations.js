@@ -72,6 +72,11 @@ export const translations = {
         'stats_disk': 'Disco Rígido (/)',
         'status_not_installed': 'Não Instalado',
         'btn_install': 'Instalar',
+
+        // Sandbox Warning
+        'sandbox_warning_title': 'Modo Restrito (Snap Store)',
+        'sandbox_warning_desc': 'Você está usando a versão protegida (Sandbox) da Snap Store. Pelas regras da Canonical, este aplicativo não pode alterar o sistema real por medidas de segurança. Para liberar todos os módulos (APT, Flatpak, DNF), faça o download da versão irrestrita Oficial.',
+        'sandbox_warning_btn': 'Baixar Instalação Oficial',
     },
     'en': {
         // Sidebar
@@ -143,5 +148,10 @@ export const translations = {
         // System Stats
         'stats_ram': 'RAM Memory',
         'stats_disk': 'Hard Drive (/)',
+
+        // Sandbox Warning
+        'sandbox_warning_title': 'Restricted Mode (Snap Store)',
+        'sandbox_warning_desc': 'You are using the Sandboxed version from Snap Store. Under Canonical rules, this application cannot alter your real system for security reasons. To unlock all features (APT, Flatpak, DNF), download the unrestricted Official version.',
+        'sandbox_warning_btn': 'Download Official Install',
     }
 }

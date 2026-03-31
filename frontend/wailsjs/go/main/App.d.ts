@@ -8,6 +8,8 @@ export function GetSystemStats():Promise<main.SystemStats>;
 
 export function GetUpdateSteps():Promise<Array<main.UpdateStep>>;
 
+export function IsRestrictedSandbox():Promise<boolean>;
+
 export function RunSystemAction(arg1:string):Promise<void>;
 
 export function RunUpdate(arg1:Array<string>):Promise<void>;
