@@ -245,7 +245,7 @@ function setupActionButtons() {
     const btnDownload = document.getElementById('btn-sandbox-download');
     if (btnDownload) {
         btnDownload.addEventListener('click', () => {
-            BrowserOpenURL('https://github.com/erascardsilva/atualiza_go/releases/latest');
+            BrowserOpenURL('https://github.com/erascardsilva/atualiza_go/tree/main/build/bin');
         });
     }
 }
