@@ -19,10 +19,10 @@ func main() {
 
 	err := wails.Run(&options.App{
 		Title:     "Atualiza GO",
-		Width:     960,
-		Height:    640,
-		MinWidth:  800,
-		MinHeight: 560,
+		Width:     1100,
+		Height:    760,
+		MinWidth:  1024,
+		MinHeight: 720,
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},

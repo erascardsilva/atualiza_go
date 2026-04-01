@@ -74,9 +74,9 @@ export const translations = {
         'btn_install': 'Instalar',
 
         // Sandbox Warning
-        'sandbox_warning_title': 'Modo Restrito (Snap Store)',
-        'sandbox_warning_desc': 'Você está usando a versão protegida (Sandbox) da Snap Store. Pelas regras da Canonical, este aplicativo não pode alterar o sistema real por medidas de segurança. Para liberar todos os módulos (APT, Flatpak, DNF), faça o download da versão irrestrita Oficial.',
-        'sandbox_warning_btn': 'Baixar Instalação Oficial',
+        'sandbox_warning_title': 'Versão Snap (Sandbox)',
+        'sandbox_warning_desc': 'Esta versão possui restrições de segurança do sistema. Para utilizar todas as funções (APT, DNF, etc), recomendamos a instalação da versão completa.',
+        'sandbox_warning_btn': 'Baixar Versão Completa',
     },
     'en': {
         // Sidebar
@@ -150,8 +150,8 @@ export const translations = {
         'stats_disk': 'Hard Drive (/)',
 
         // Sandbox Warning
-        'sandbox_warning_title': 'Restricted Mode (Snap Store)',
-        'sandbox_warning_desc': 'You are using the Sandboxed version from Snap Store. Under Canonical rules, this application cannot alter your real system for security reasons. To unlock all features (APT, Flatpak, DNF), download the unrestricted Official version.',
-        'sandbox_warning_btn': 'Download Official Install',
+        'sandbox_warning_title': 'Snap Version (Sandbox)',
+        'sandbox_warning_desc': 'This version has system security restrictions. To use all update features (APT, DNF, etc.), we recommend installing the full version.',
+        'sandbox_warning_btn': 'Download Full Version',
     }
 }

@@ -2,7 +2,7 @@
 /* Erasmo Cardoso - Dev */
 
 import { GetDistroInfo, GetUpdateSteps, RunUpdate, RunSystemAction, GetSystemStats, IsRestrictedSandbox } from '../wailsjs/go/main/App';
-import { EventsOn } from '../wailsjs/runtime/runtime';
+import { EventsOn, BrowserOpenURL } from '../wailsjs/runtime/runtime';
 import { translations } from './translations';
 import './style.css';
 
@@ -241,6 +241,13 @@ function setupActionButtons() {
     });
     document.getElementById('btn-reboot').addEventListener('click', () => confirmAction('reboot'));
     document.getElementById('btn-shutdown').addEventListener('click', () => confirmAction('shutdown'));
+
+    const btnDownload = document.getElementById('btn-sandbox-download');
+    if (btnDownload) {
+        btnDownload.addEventListener('click', () => {
+            BrowserOpenURL('https://github.com/erascardsilva/atualiza_go/releases/latest');
+        });
+    }
 }
 
 async function startUpdate() {

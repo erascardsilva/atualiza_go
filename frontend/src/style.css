@@ -999,10 +999,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(251, 191, 36, 0.15);
-    border: 1px solid var(--warning);
+    background: rgba(124, 58, 237, 0.1);
+    border: 1px solid var(--accent);
     border-radius: var(--radius-lg);
-    padding: 16px 24px;
+    padding: 18px 24px;
     margin-bottom: 24px;
     gap: 20px;
     animation: fadeIn 0.4s ease;
@@ -1021,7 +1021,7 @@ body {
 }
 
 .sandbox-banner-content h3 {
-    color: var(--warning);
+    color: var(--accent);
     font-size: 16px;
     margin-bottom: 4px;
 }
@@ -1035,9 +1035,10 @@ body {
 .btn-sandbox-link {
     display: inline-block;
     padding: 10px 20px;
-    background: var(--warning);
-    color: #000;
-    text-decoration: none;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
     font-weight: 700;
     font-size: 13px;
     border-radius: var(--radius-sm);
@@ -1046,7 +1047,7 @@ body {
 }
 
 .btn-sandbox-link:hover {
-    background: #fcd34d;
+    background: #8b5cf6;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
 }
