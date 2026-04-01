@@ -21,9 +21,9 @@ fi
 mkdir -p build/packages
 
 echo "Empacotando .deb..."
-nfpm pkg --config nfpm.yaml --target build/packages/ --packager deb
+nfpm pkg --config nfpm.yaml --target build/bin/ --packager deb
 
 echo "Empacotando .rpm..."
-nfpm pkg --config nfpm.yaml --target build/packages/ --packager rpm
+nfpm pkg --config nfpm.yaml --target build/bin/ --packager rpm
 
-echo "Concluido! Verifique a pasta build/packages/"
+echo "Concluido! Verifique a pasta build/bin/"

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Atualiza GO
+Comment=Atualizador de Sistema Linux Moderno
+Exec=atualiza_go
+Icon=atualiza-go
+Terminal=false
+Type=Application
+Categories=System;Settings;
+Keywords=update;atualizar;sistema;system;apt;pacman;flatpak;
