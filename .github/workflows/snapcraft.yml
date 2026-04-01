@@ -48,3 +48,14 @@ jobs:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
         run: |
           snapcraft upload ${{ steps.build.outputs.snap }} --release edge --verbose
+
+      - name: Criar GitHub Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.build.outputs.snap }}
+          tag_name: "v${{ github.run_number }}"
+          name: "Atualiza GO - Lançamento #${{ github.run_number }}"
+          body: "Versão oficial e irrestrita do Atualiza GO (Instalação via arquivo .snap ou manual)."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
