@@ -3,26 +3,26 @@
 [![Snap Store](https://snapcraft.io/pt/dark/install.svg)](https://snapcraft.io/atualiza-go)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Interface para atualização e manutenção de sistemas Linux desenvolvida com [Wails](https://wails.io) (Go + Webview).
+System update and maintenance interface for Linux, built with [Wails](https://wails.io) (Go + Webview).
 
-O **Atualiza GO** detecta automaticamente a distribuição e oferece opções de atualização para pacotes do sistema, Flatpak e Snap.
+**Atualiza GO** automatically detects your distribution and provides update options for system packages, Flatpak, and Snap.
 
-## Funcionalidades
+## Features
 
-- **Detecção de Sistema**: Identifica a distro via `/etc/os-release` com fallback para binários do gestor de pacotes.
-- **Suporte Multi-distro**: Compatível com famílias Debian, Arch, Fedora, openSUSE, Alpine, Void e Solus.
-- **Interface Bilíngue**: Troca dinâmica entre Português (PT-BR) e Inglês (EN).
-- **Gerenciamento de Pacotes**: Suporte para APT, Pacman, DNF, Zypper, APK, XBPS e EOPKG.
-- **Flatpak e Snap**: Detecta e atualiza aplicações em ambos os ecossistemas.
-- **Monitoramento**: Acompanhamento em tempo real de uso de RAM e Disco.
-- **Limpeza de Sistema**: Remoção segura de caches temporários de pacotes.
-- **Energia**: Opções de Reiniciar e Desligar com confirmação.
-- **Segurança**: Autorização gráfica via `pkexec` (Polkit).
+- **Distro Detection**: Identifies host via `/etc/os-release` with binary fallback.
+- **Multi-distro Support**: Native support for Debian, Arch, Fedora, openSUSE, Alpine, Void, and Solus families.
+- **Bilingual UI**: Dynamic switching between Portuguese (PT-BR) and English (EN).
+- **Package Management**: Supports APT, Pacman, DNF, Zypper, APK, XBPS, and EOPKG.
+- **Flatpak & Snap**: Detects and updates apps in both ecosystems.
+- **Resource Monitoring**: Real-time RAM and Disk usage tracking.
+- **System Cleanup**: Safely removes temporary package caches.
+- **Power Management**: Reboot and Shutdown with confirmation prompts.
+- **Security**: Graphical authorization via `pkexec` (Polkit).
 
-## Instalação
+## Installation
 
-### Pacotes Nativos (.deb / .rpm) (Recomendado)
-Baixe o instalador `.deb` ou `.rpm` na página de [Releases](https://github.com/erascardsilva/atualiza_go/releases/latest). Esta versão possui acesso total ao sistema e integração com o menu.
+### Native Packages (.deb / .rpm) (Recommended)
+Download the `.deb` or `.rpm` installer from the [Releases](https://github.com/erascardsilva/atualiza_go/releases/latest) page. This version has full system access and menu integration.
 
 ```bash
 # Debian / Ubuntu
@@ -32,8 +32,8 @@ sudo dpkg -i atualiza-go_linux_amd64.deb
 sudo rpm -i atualiza-go_linux_amd64.rpm
 ```
 
-### Executável Portátil
-Dê permissão de execução ao binário baixado:
+### Portable Executable
+Grant execution permissions to the downloaded binary:
 ```bash
 chmod +x atualiza_go
 ./atualiza_go
@@ -41,56 +41,56 @@ chmod +x atualiza_go
 
 ### Snap Store (Sandbox / Read-Only)
 
-[![Disponível na Snap Store](https://snapcraft.io/pt/dark/install.svg)](https://snapcraft.io/atualiza-go)
+[![Get it from the Snap Store](https://snapcraft.io/pt/dark/install.svg)](https://snapcraft.io/atualiza-go)
 
-Instale via Snap. Devido ao confinamento `strict`, esta versão funciona apenas como **Painel de Monitoramento (Read-Only)**, sem permissão para modificar o sistema:
+Install via Snap. Due to `strict` confinement, this version works as a **Read-Only Monitoring Dashboard** and cannot modify your host system:
 ```bash
 sudo snap install atualiza-go
 ```
 
 ### Flatpak
-Instalação via arquivo:
+Install from file:
 ```bash
 flatpak install io.github.erascardsilva.atualizago.flatpak
 ```
 
-### Build do Código
+### Build from Source
 
-#### Pré-requisitos
+#### Prerequisites
 - Go 1.21+
 - Wails CLI v2
-- Bibliotecas GTK (ex: `libwebkit2gtk-4.0-dev`)
+- GTK Libraries (e.g., `libwebkit2gtk-4.0-dev`)
 - Polkit (`pkexec`)
 
-#### Compilação
+#### Compilation
 ```bash
-# Instalar Wails
+# Install Wails
 go install github.com/wailsapp/wails/v2/cmd/wails@latest
 
-# Compilar
+# Build
 wails build
 ```
 
-## Arquitetura
+## Architecture
 
 ```
 atualiza_go/
-├── main.go          # Ponto de entrada (janela, bindings)
-├── app.go           # Estrutura principal e ciclo de vida
-├── distro.go        # Lógica de detecção de distro
-├── sysinfo.go       # Telemetria (RAM/Disco)
-├── updater.go       # Motor de atualização e streaming de logs
+├── main.go          # Entry point (window, bindings)
+├── app.go           # Core struct and lifecycle
+├── distro.go        # Distro detection logic
+├── sysinfo.go       # Telemetry (RAM/Disk)
+├── updater.go       # Update engine and log streaming
 ├── frontend/
-    ├── index.html   # Layout UI
+    ├── index.html   # UI Layout
     └── src/
-        ├── translations.js # Dicionário i18n
-        ├── style.css       # Estilização CSS
-        └── main.js         # Lógica do frontend e bindings
+        ├── translations.js # i18n dictionary
+        ├── style.css       # CSS Styling
+        └── main.js         # Frontend logic and bindings
 ```
 
-## Distribuições Suportadas
+## Supported Distributions
 
-| Família | Exemplos | Gestor de Pacotes |
+| Family | Examples | Package Manager |
 |:---:|:---|:---:|
 | **Debian** | Debian, Ubuntu, Mint, Pop!_OS, Zorin, Kali, MX | `apt` |
 | **Arch** | Arch, Manjaro, EndeavourOS, Garuda, CachyOS | `pacman` |
@@ -100,12 +100,12 @@ atualiza_go/
 | **Void** | Void Linux | `xbps` |
 | **Solus** | Solus OS | `eopkg` |
 
-## Uso
+## Usage
 
-1. Inicie a aplicação.
-2. O dashboard detecta os recursos e a distribuição automaticamente.
-3. Na aba **Update**, selecione as tarefas e clique em **Start Update**.
-4. Autentique via Polkit quando solicitado.
+1. Launch the application.
+2. The dashboard automatically detects system resources and distribution.
+3. In the **Update** tab, select tasks and click **Start Update**.
+4. Authenticate via Polkit when prompted.
 
 ---
 
