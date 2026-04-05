@@ -1,6 +1,5 @@
 // Atualiza GO - Atualizador de Sistema Linux
-// Erasmo Cardoso - Dev
-
+// Erasmo Cardoso - Software Engineer | Electronics Specialist
 package main
 
 import (

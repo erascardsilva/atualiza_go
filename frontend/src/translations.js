@@ -1,5 +1,5 @@
 /* Atualiza GO - Dicionário de Idiomas (i18n) */
-/* Erasmo Cardoso - Dev */
+/* Erasmo Cardoso - Software Engineer | Electronics Specialist */
 
 export const translations = {
     'pt-br': {

@@ -1,6 +1,5 @@
 // Atualiza GO - Telemetria de Sistema
-// Erasmo Cardoso - Dev
-
+// Erasmo Cardoso - Software Engineer | Electronics Specialist
 package main
 
 import (
@@ -13,13 +12,13 @@ import (
 )
 
 type SystemStats struct {
-	MemTotal     uint64  `json:"memTotal"`
-	MemUsed      uint64  `json:"memUsed"`
-	MemPercent   float64 `json:"memPercent"`
-	DiskTotal    string  `json:"diskTotal"`
-	DiskUsed     string  `json:"diskUsed"`
-	DiskPercent  float64 `json:"diskPercent"`
-	DiskMessage  string  `json:"diskMessage"`
+	MemTotal    uint64  `json:"memTotal"`
+	MemUsed     uint64  `json:"memUsed"`
+	MemPercent  float64 `json:"memPercent"`
+	DiskTotal   string  `json:"diskTotal"`
+	DiskUsed    string  `json:"diskUsed"`
+	DiskPercent float64 `json:"diskPercent"`
+	DiskMessage string  `json:"diskMessage"`
 }
 
 func (a *App) GetSystemStats() SystemStats {

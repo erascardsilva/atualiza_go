@@ -1,5 +1,5 @@
 /* Atualiza GO - Lógica Principal do Frontend */
-/* Erasmo Cardoso - Dev */
+/* Erasmo Cardoso - Software Engineer | Electronics Specialist */
 
 import { GetDistroInfo, GetUpdateSteps, RunUpdate, RunSystemAction, GetSystemStats, IsRestrictedSandbox } from '../wailsjs/go/main/App';
 import { EventsOn, BrowserOpenURL } from '../wailsjs/runtime/runtime';

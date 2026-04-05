@@ -1,6 +1,5 @@
 // Atualiza GO - Detecção de Distribuição Linux
-// Erasmo Cardoso - Dev
-
+// Erasmo Cardoso - Software Engineer | Electronics Specialist
 package main
 
 import (
@@ -112,13 +111,13 @@ func detectDistro() DistroInfo {
 		info.PackageManager = "unknown"
 
 		managers := map[string]string{
-			"apt":    "debian",
-			"pacman": "arch",
-			"dnf":    "fedora",
-			"zypper": "suse",
-			"apk":    "alpine",
+			"apt":          "debian",
+			"pacman":       "arch",
+			"dnf":          "fedora",
+			"zypper":       "suse",
+			"apk":          "alpine",
 			"xbps-install": "void",
-			"eopkg":  "solus",
+			"eopkg":        "solus",
 		}
 
 		for cmd, fam := range managers {
