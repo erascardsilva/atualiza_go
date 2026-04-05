@@ -109,4 +109,5 @@ atualiza_go/
 
 ---
 
-**Erasmo Cardoso - Dev**
+**Erasmo Cardoso**<br>
+**Software Engineer | Electronics Specialist**
