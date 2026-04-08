@@ -8,7 +8,7 @@ description: |
   as well as Flatpak and Snap ecosystems. It also includes a telemetry dashboard for RAM and Disk monitoring.
 
 grade: stable
-confinement: classic
+confinement: strict
 
 title: Atualiza GO
 license: GPL-3.0
@@ -18,6 +18,15 @@ icon: snap/gui/atualiza-go.png
 apps:
   atualiza-go:
     command: bin/atualiza_go
+    plugs:
+      - desktop
+      - desktop-legacy
+      - wayland
+      - x11
+      - network
+      - network-bind
+      - opengl
+      - system-observe
     environment:
       # Garante que o app encontre as bibliotecas estagiadas se necessário
       LD_LIBRARY_PATH: $SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/webkit2gtk-4.0
