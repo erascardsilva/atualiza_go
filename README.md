@@ -109,5 +109,13 @@ atualiza_go/
 
 ---
 
+## Support the Developer
+
+If you find **Atualiza GO** useful, consider supporting its development. Your contribution helps keep the project active and improved.
+
+[![PayPal Donate](https://img.shields.io/badge/Donate-PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/ncp/payment/8V6WQCGN6HDCQ)
+
+---
+
 **Erasmo Cardoso**<br>
 **Software Engineer | Electronics Specialist**

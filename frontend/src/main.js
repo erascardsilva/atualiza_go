@@ -248,6 +248,17 @@ function setupActionButtons() {
             BrowserOpenURL('https://github.com/erascardsilva/atualiza_go/tree/main/build/bin');
         });
     }
+
+    const paypalURL = 'https://www.paypal.com/ncp/payment/8V6WQCGN6HDCQ';
+    const btnSidebarPaypal = document.getElementById('btn-sidebar-paypal');
+    if (btnSidebarPaypal) {
+        btnSidebarPaypal.addEventListener('click', () => BrowserOpenURL(paypalURL));
+    }
+
+    const btnAboutPaypal = document.getElementById('btn-about-paypal');
+    if (btnAboutPaypal) {
+        btnAboutPaypal.addEventListener('click', () => BrowserOpenURL(paypalURL));
+    }
 }
 
 async function startUpdate() {

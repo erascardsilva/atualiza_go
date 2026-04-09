@@ -77,6 +77,12 @@ export const translations = {
         'sandbox_warning_title': 'Versão Snap (Sandbox)',
         'sandbox_warning_desc': 'Esta versão possui restrições de segurança do sistema. Para utilizar todas as funções (APT, DNF, etc), recomendamos a instalação da versão completa.',
         'sandbox_warning_btn': 'Baixar Versão Completa',
+        
+        // Donation
+        'nav_support': 'Apoie',
+        'about_support_title': 'Apoie o Desenvolvedor',
+        'about_support_desc': 'Se você gosta deste projeto, considere fazer uma doação para apoiar o desenvolvimento contínuo.',
+        'btn_donate_paypal': 'Apoie via PayPal',
     },
     'en': {
         // Sidebar
@@ -153,5 +159,11 @@ export const translations = {
         'sandbox_warning_title': 'Snap Version (Sandbox)',
         'sandbox_warning_desc': 'This version has system security restrictions. To use all update features (APT, DNF, etc.), we recommend installing the full version.',
         'sandbox_warning_btn': 'Download Full Version',
+
+        // Donation
+        'nav_support': 'Support',
+        'about_support_title': 'Support the Developer',
+        'about_support_desc': 'If you like this project, consider making a donation to support continuous development.',
+        'btn_donate_paypal': 'Support via PayPal',
     }
 }
