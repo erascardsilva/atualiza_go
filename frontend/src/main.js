@@ -1,5 +1,5 @@
 /* Atualiza GO - Lógica Principal do Frontend */
-/* Erasmo Cardoso - Software Engineer | Electronics Specialist */
+/* Erasmo Cardoso - Software Engineer |  Electronics Technician */
 
 import { GetDistroInfo, GetUpdateSteps, RunUpdate, RunSystemAction, GetSystemStats, IsRestrictedSandbox } from '../wailsjs/go/main/App';
 import { EventsOn, BrowserOpenURL } from '../wailsjs/runtime/runtime';
@@ -25,7 +25,7 @@ async function init() {
     await checkSandboxMode();
     await loadUpdateSteps();
     listenProgress();
-    
+
     // Inicia telemetria
     updateTelemetry();
     setInterval(updateTelemetry, 5000);
@@ -63,17 +63,17 @@ async function checkSandboxMode() {
         if (isSandbox) {
             const banner = document.getElementById('sandbox-banner');
             if (banner) banner.classList.remove('hidden');
-            
+
             // Trava o motor inteiro
             state.running = true;
-            
+
             const btnUpdate = document.getElementById('btn-update');
             if (btnUpdate) {
                 btnUpdate.disabled = true;
                 btnUpdate.innerHTML = `<span class="btn-icon">🚫</span> Restrito`;
             }
         }
-    } catch(err) {
+    } catch (err) {
         console.error('Sandbox detect error:', err);
     }
 }
@@ -81,7 +81,7 @@ async function checkSandboxMode() {
 async function updateTelemetry() {
     try {
         const stats = await GetSystemStats();
-        
+
         // RAM
         const ramBar = document.getElementById('ram-bar');
         const ramTxt = document.getElementById('ram-usage');
@@ -168,7 +168,7 @@ function updateFeatureStatus(feat, installed) {
         statusEl.textContent = t('status_not_installed');
         statusEl.className = 'feature-status unavailable';
         actionsEl.innerHTML = `<button class="btn-install" data-feat="${feat}">${t('btn_install')}</button>`;
-        
+
         actionsEl.querySelector('.btn-install').addEventListener('click', () => {
             // Vai para a página de atualização e seleciona o instalador
             document.querySelector('[data-page="update"]').click();
@@ -207,7 +207,7 @@ function renderUpdateOptions(steps) {
         el.className = 'update-option';
         if (state.selectedSteps.has(step.id)) el.classList.add('selected');
         el.dataset.stepId = step.id;
-        
+
         const translatedLabel = t('step_' + step.id);
         const labelText = translatedLabel !== 'step_' + step.id ? translatedLabel : step.label;
 
@@ -349,7 +349,7 @@ function listenProgress() {
             `;
             stepsDiv.appendChild(banner);
         }
-        
+
         // Recarrega info para ver se flatpak/snap foram instalados
         await loadDistroInfo();
         await loadUpdateSteps();

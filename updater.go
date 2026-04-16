@@ -1,5 +1,5 @@
 // Atualiza GO - Motor de Atualização
-// Erasmo Cardoso - Software Engineer | Electronics Specialist
+// Erasmo Cardoso - Software Engineer |  Electronics Technician
 package main
 
 import (

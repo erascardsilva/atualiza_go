@@ -118,4 +118,4 @@ If you find **Atualiza GO** useful, consider supporting its development. Your co
 ---
 
 **Erasmo Cardoso**<br>
-**Software Engineer | Electronics Specialist**
+**Software Engineer |  Electronics Technician**

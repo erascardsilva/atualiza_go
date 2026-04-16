@@ -1,5 +1,5 @@
 /* Atualiza GO - Design System */
-/* Erasmo Cardoso - Software Engineer | Electronics Specialist */
+/* Erasmo Cardoso - Software Engineer |  Electronics Technician */
 
 *,
 *::before,
@@ -1101,7 +1101,8 @@ body {
     align-items: center;
     gap: 10px;
     padding: 12px 24px;
-    background: #0070ba; /* PayPal Blue */
+    background: #0070ba;
+    /* PayPal Blue */
     color: white;
     border: none;
     border-radius: var(--radius-sm);

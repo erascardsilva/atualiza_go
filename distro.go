@@ -1,5 +1,5 @@
 // Atualiza GO - Detecção de Distribuição Linux
-// Erasmo Cardoso - Software Engineer | Electronics Specialist
+// Erasmo Cardoso - Software Engineer |  Electronics Technician
 package main
 
 import (

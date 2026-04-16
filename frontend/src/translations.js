@@ -1,5 +1,5 @@
 /* Atualiza GO - Dicionário de Idiomas (i18n) */
-/* Erasmo Cardoso - Software Engineer | Electronics Specialist */
+/* Erasmo Cardoso - Software Engineer |  Electronics Technician */
 
 export const translations = {
     'pt-br': {
@@ -77,7 +77,7 @@ export const translations = {
         'sandbox_warning_title': 'Versão Snap (Sandbox)',
         'sandbox_warning_desc': 'Esta versão possui restrições de segurança do sistema. Para utilizar todas as funções (APT, DNF, etc), recomendamos a instalação da versão completa.',
         'sandbox_warning_btn': 'Baixar Versão Completa',
-        
+
         // Donation
         'nav_support': 'Apoie',
         'about_support_title': 'Apoie o Desenvolvedor',
